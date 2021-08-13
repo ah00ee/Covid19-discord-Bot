@@ -42,8 +42,8 @@ n = crawl_cases()
 async def notice():
     if datetime.datetime.now().minute == 0 and datetime.datetime.now().second == 0:
         s = datetime.datetime.now().strftime('%Y-%m-%d %H')
-        await client.get_channel('(int)Your channel ID').send(f'{s}시 기준 확진자수는 {n[0]}명입니다.')
-        await client.get_channel('(int)Your channel ID').send(cal_cases(n))
+        await client.get_channel(873623906907467887).send(f'{s}시 기준 확진자수는 {n[0]}명입니다.')
+        await client.get_channel(873623906907467887).send(cal_cases(n))
 
 @client.event
 async def on_ready():
