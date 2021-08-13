@@ -3,11 +3,19 @@ import datetime
 import time
 from selenium import webdriver
 from bs4 import BeautifulSoup
+import os
 
 def crawl_cases():
     options = webdriver.ChromeOptions()
+    
+    options.add_argument("--headless")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--no-sandbox")
+
+    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
-    driver = webdriver.Chrome(executable_path='C:\\Users\\nhoah\Downloads\chromedriver_win32/chromedriver.exe', options=options)
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
 
     url = 'https://corona-live.com/'
     driver.get(url)
@@ -47,4 +55,4 @@ async def cc(ctx): #confirmed_cases
     await ctx.send(f'{s}시 기준 확진자수는 {n[0]}명입니다.')
     await ctx.send(cal_cases(n))
 
-client.run('Your Token')
+client.run(os.environ['token'])
