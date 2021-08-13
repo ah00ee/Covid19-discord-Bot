@@ -2,3 +2,4 @@ discord.py
 asyncio
 selenium
 bs4
+pytz
