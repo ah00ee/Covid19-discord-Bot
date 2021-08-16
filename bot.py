@@ -42,11 +42,11 @@ client = commands.Bot(command_prefix='!')
 
 @tasks.loop(seconds=1)
 async def notice():
-    if now().hour == 11:
+    if now().hour >= 23 and now().minute() == 0 and now().second() == 0:
         await asyncio.sleep(35999)
-    if now().minute == 0 and now().second == 0:
+    elif now().minute == 0 and now().second == 0:
         n = crawl_cases()
-        s = datetime.datetime.now(timezone('Asia/Seoul')).strftime('%Y-%m-%d %H')
+        s = now().strftime('%Y-%m-%d %H')
         await client.get_channel(873623906907467887).send(f'{s}시 기준 확진자수는 {n[0]}명입니다.')
         await client.get_channel(873623906907467887).send(cal_cases(n))
 
@@ -57,7 +57,7 @@ async def on_ready():
 @client.command()
 async def cc(ctx): #confirmed_cases
     n = crawl_cases()
-    s = datetime.datetime.now(timezone('Asia/Seoul')).strftime('%Y-%m-%d %H')
+    s = now().strftime('%Y-%m-%d %H')
     await ctx.send(f'{s}시 기준 확진자수는 {n[0]}명입니다.')
     await ctx.send(cal_cases(n))
 
