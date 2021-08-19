@@ -42,7 +42,7 @@ client = commands.Bot(command_prefix='!')
 
 @tasks.loop(seconds=1)
 async def notice():
-    if now().hour >= 23 and now().minute() == 0 and now().second() == 0:
+    if now().hour < 9 and now().minute == 0 and now().second == 0:
         await asyncio.sleep(35999)
     elif now().minute == 0 and now().second == 0:
         n = crawl_cases()
